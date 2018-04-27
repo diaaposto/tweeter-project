@@ -6,6 +6,9 @@ const PORT          = 8080;
 const express       = require("express");
 const bodyParser    = require("body-parser");
 const app           = express();
+var moment = require('moment');
+moment().format();
+
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
