@@ -153,4 +153,8 @@
   margin-left: 30px;
 }
 
+.error-message h5 {
+  /* display: none; */
+}
+
 /*//p tag text align vertical within div*/

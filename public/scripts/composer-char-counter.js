@@ -5,7 +5,6 @@ $(document).ready(function(){
 //create an event handler for each of these events in the file
 //how do we create an event handler/listener?
 
-
 //you have to tell on which element
  // $("textarea").on('change', function(event){ //first parameter tells on which event this will happen
  //  console.log("on change");
@@ -14,7 +13,7 @@ $(document).ready(function(){
   $("textarea").on("keyup", function() {
     const charactersLeft = 140 - $(this).val().length;
     const counter = $(this).siblings('.counter');
-    counter.html(charactersLeft);
+    counter.html(charactersLeft); // use .text instead of html here and do not escape - change escape character function
     if (charactersLeft < 0) {
       counter.addClass("redText");
     } else {
