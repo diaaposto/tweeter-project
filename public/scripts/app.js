@@ -114,6 +114,9 @@ function renderTweets(data) {
     $('#tweet-container').prepend(tweetElement);
   }
 }
+//reset your form so form content should be clear and reset your counter to 140
+//if you clear content of your form counter should reset automatically
+//find counterclass in form and change its value to 140
 
 $(document).ready(function() {
   $('.error-message').hide();
@@ -140,8 +143,11 @@ $(document).ready(function() {
         method: "POST",
         url: url,
         data: dataString,
-        success: function(data) {
-          loadTweets()
+        success: (data) => {
+          $(this)[0].reset(); 
+          $(this).find('.counter').text(140); 
+          // console.log($(this));//when you have a parent you use find 
+          loadTweets();
         }
       });
     }
