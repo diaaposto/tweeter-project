@@ -75,7 +75,7 @@
   font-size: 1em;
   font-weight: 100;
   color: rgba(128, 128, 128, 0.63);
-  text-align: right;
+  text-align: end;
   flex: 1;
   padding-right: 10px;
 }
@@ -88,7 +88,7 @@
 .tweet header .tweeter-handle {
   color: #62676b;
   padding: 0px;
-  margin-right: 20px;
+  margin-right: 5px;
 }
 
 .tweet .tweet-body {

@@ -1,3 +1,4 @@
+
 /*
  * Client-side JS logic goes here
  * jQuery is already loaded
@@ -60,6 +61,17 @@
 
 // } 
 
+function describeTime(t) {
+  const now = new Date();
+  const timeDiff = now - t;
+  if (timeDiff <= 1000) {
+    return "less than 1 second ago";
+  } else if (timeDiff <= 1000 * 60) {
+    return "less than 1 min ago";
+  } else if (1000 * 60 * 60) {
+    return "less than 1 hour ago";
+  }   
+}
 
 function createTweetElement(tweet) {
   // console.log(tweet.user.avatars.small);
@@ -81,7 +93,7 @@ function createTweetElement(tweet) {
 
           <footer>
             <div class="tweet-time">
-              10 days ago
+            ${describeTime(tweet.created_at)}
               </div>
               
               <div class="icons">
@@ -95,31 +107,13 @@ function createTweetElement(tweet) {
   return $(tweetElement);
 }
 
-// }
 
 function renderTweets(data) {
   for (const tweet of data) {
     const tweetElement = createTweetElement(tweet);
     $('#tweet-container').prepend(tweetElement);
   }
-  // for (let index = 0; index < data.length; index++) {
-  //   let tweet = data[index];
-  // $("#tweet-prototype").clone().attr('id', "tweet-" + index).appendTo("#tweet-container");
-  // $('#tweet-' + index).find('.tweeter-name').html(data[index].user.name);
-  // $('#tweet-' + index).find('.tweeter-handle').html(data[index].user.handle);
-  // $('#tweet-' + index).find('.tweet-content').html(data[index].content.text);
-  // $('#tweet-' + index).find('img').attr('src', data[index].user.avatars.small);
-  // $('#tweet-' + index).show();
-  // console.log(tweet);
-
 }
-
-// Handling callback nightmare
-// function onComposeSubmit(e) {
-
-// }
-
-// jQuery("#compose").submit(onComposeSubmit);
 
 $(document).ready(function() {
   $('.error-message').hide();
@@ -160,7 +154,7 @@ $(document).ready(function() {
       dataType: 'json',
       success: function(data) {
         // console.log(data);
-        renderTweets(data);
+        renderTweets(data); //here is where I pass in the array of obbjects - from the server in the database
       }
     });
   }
@@ -168,10 +162,6 @@ $(document).ready(function() {
   $('.tweet').hide();
   loadTweets();
 })
-
-//ajax -- callbacks that handle success or failure
-//frontend js we do things at different lifecycles of the dom
-
 
 
 //"[{"user":{"name":"Johann von Goethe","avatars":{"small":"https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1_50.png","
