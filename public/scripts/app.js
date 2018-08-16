@@ -1,66 +1,3 @@
-
-/*
- * Client-side JS logic goes here
- * jQuery is already loaded
- * Reminder: Use (and do all your DOM work in) jQuery's document ready function
- */
-
-// function createElementTwo(tweet) {
-//   let $tweetDiv = $('<div>').addClass('tweet')
-//   let $header = $('<header>')
-//   $('<img>')
-//     .attr('src', tweet.user.avatars.small)
-//     .appendTo($header)
-
-//   $('<h1>')
-//     .addClass('tweeter-name')
-//     .text(tweet.user.name)
-//     .appendTo($header)  
-
-//     $('<h2>')
-//     .addClass('tweeter-handle')
-//     .text(tweet.user.handle)
-//     .appendTo($header)
-
-//     $tweetDiv.append($header) //can't use appendTo on a parent - only used on the child
-
-//   let $tweetBodyDiv = $('<div>').addClass('tweet-body')
-//   $('<p>')
-//     .addClass('tweet-content')
-//     .appendTo($tweetBodyDiv)
-
-//     $tweetBodyDiv.appendTo($tweetDiv)
-
-//   let $footer = $('<footer>')  
-//   $('<div>')
-//     .text('10 days ago') //because it's a child it doesn't need to be declared with a variable
-//     .addClass('tweet-time')
-//     .appendTo($footer) 
-
-//   let $footerIcons = $('<div>').addClass('icons')
-//   $('<i>')
-//     .addClass('fa')
-//     .addClass('fa-flag')
-//     .attr('aria-hidden', 'true')
-//     .appendTo($footerIcons)
-
-//   $('<i>')
-//     .addClass('fa')
-//     .addClass('fa-retweet')
-//     .attr('aria-hidden', 'true')
-//     .appendTo($footerIcons)
-
-//   $('<i>')
-//     .addClass('fa')
-//     .addClass('fa-heart')
-//     .attr('aria-hidden', 'true')
-//     .appendTo($footerIcons) 
-
-//     $footerIcons.appendTo($footer)
-//     $footer.appendTo($tweetDiv)
-
-// } 
-
 function describeTime(t) {
   const now = new Date();
   const timeDiff = now - t;
@@ -133,9 +70,6 @@ $(document).ready(function() {
       $('.error-message').slideDown(1000)
                          .delay(2000)
                          .slideUp(1000);
-
-      //slideup after timeout and then hide it again //fade in fade out
-      // $('.error-message').slideUp();
     } else {
       // console.log("Success");
       // console.log(dataString);
@@ -145,8 +79,8 @@ $(document).ready(function() {
         data: dataString,
         success: (data) => {
           $(this)[0].reset(); 
-          $(this).find('.counter').text(140); 
-          // console.log($(this));//when you have a parent you use find 
+          $(this).find('.counter').text(140); //when you have a parent you use find 
+          // console.log($(this));
           loadTweets();
         }
       });
@@ -160,7 +94,7 @@ $(document).ready(function() {
       dataType: 'json',
       success: function(data) {
         // console.log(data);
-        renderTweets(data); //here is where I pass in the array of obbjects - from the server in the database
+        renderTweets(data); //here is where I pass in the array of objects - from the server in the database
       }
     });
   }
@@ -170,7 +104,65 @@ $(document).ready(function() {
 })
 
 
-//"[{"user":{"name":"Johann von Goethe","avatars":{"small":"https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1_50.png","
-// regular":"https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1.png","large":"https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1_200.png"},
-// "handle":"@johann49"},"content":{"text":"Es ist nichts schrecklicher als eine tätige Unwissenheit."},"created_at":1461113796368},{"user":{"name":"Descartes","avatars":{"small":"https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc_50.png","regular":"https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc.png","large":"https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc_200.png"},"handle":"@rd"},"content":{"text":"Je pense , donc je suis"},"created_at":1461113959088},{"user":{"name":"Newton","avatars":{"small":"https://vanillicon.com/788e533873e80d2002fa14e1412b4188_50.png","regular":"https://vanillicon.com/788e533873e80d2002fa14e1412b4188.png","large":"https://vanillicon.com/788e533873e80d2002fa14e1412b4188_200.png"},"handle":"@SirIsaac"},"content":
-// {"text":"If I have seen further it is by standing on the shoulders of giants"},"created_at":1461116232227}]"
+
+/*
+ * Client-side JS logic goes here
+ * jQuery is already loaded
+ * Reminder: Use (and do all your DOM work in) jQuery's document ready function
+ */
+
+// function createElementTwo(tweet) {
+//   let $tweetDiv = $('<div>').addClass('tweet')
+//   let $header = $('<header>')
+//   $('<img>')
+//     .attr('src', tweet.user.avatars.small)
+//     .appendTo($header)
+
+//   $('<h1>')
+//     .addClass('tweeter-name')
+//     .text(tweet.user.name)
+//     .appendTo($header)  
+
+//     $('<h2>')
+//     .addClass('tweeter-handle')
+//     .text(tweet.user.handle)
+//     .appendTo($header)
+
+//     $tweetDiv.append($header) //can't use appendTo on a parent - only used on the child
+
+//   let $tweetBodyDiv = $('<div>').addClass('tweet-body')
+//   $('<p>')
+//     .addClass('tweet-content')
+//     .appendTo($tweetBodyDiv)
+
+//     $tweetBodyDiv.appendTo($tweetDiv)
+
+//   let $footer = $('<footer>')  
+//   $('<div>')
+//     .text('10 days ago') //because it's a child it doesn't need to be declared with a variable
+//     .addClass('tweet-time')
+//     .appendTo($footer) 
+
+//   let $footerIcons = $('<div>').addClass('icons')
+//   $('<i>')
+//     .addClass('fa')
+//     .addClass('fa-flag')
+//     .attr('aria-hidden', 'true')
+//     .appendTo($footerIcons)
+
+//   $('<i>')
+//     .addClass('fa')
+//     .addClass('fa-retweet')
+//     .attr('aria-hidden', 'true')
+//     .appendTo($footerIcons)
+
+//   $('<i>')
+//     .addClass('fa')
+//     .addClass('fa-heart')
+//     .attr('aria-hidden', 'true')
+//     .appendTo($footerIcons) 
+
+//     $footerIcons.appendTo($footer)
+//     $footer.appendTo($tweetDiv)
+
+// } 
