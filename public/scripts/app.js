@@ -1,13 +1,25 @@
+//how js date to string to get dd/mm/yyyy
 function describeTime(t) {
   const now = new Date();
   const timeDiff = now - t;
+  console.log("timediff is", timeDiff);
+  console.log("now is", now);
+  console.log("t is", t);
+  console.log("is this t or f", timeDiff <= 1000);
+
   if (timeDiff <= 1000) {
     return "less than 1 second ago";
   } else if (timeDiff <= 1000 * 60) {
     return "less than 1 min ago";
-  } else if (1000 * 60 * 60) {
+  } else if (timeDiff <= 1000 * 60 * 60) {
     return "less than 1 hour ago";
-  }   
+  } else if (timeDiff <= (1000 * 60 * 60 * 24)) {
+    return "less than 1 day ago";
+  } else if (timeDiff <= (1000 * 60 * 60 * 24 * 7)) {
+    return "less than 1 week ago";
+  } else {
+    return "ages ago";
+  }
 }
 
 function createTweetElement(tweet) {
@@ -43,7 +55,6 @@ function createTweetElement(tweet) {
 
   return $(tweetElement);
 }
-
 
 function renderTweets(data) {
   for (const tweet of data) {
