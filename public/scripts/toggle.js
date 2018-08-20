@@ -12,3 +12,4 @@ $(document).ready(function() { - //as the html is ready do everything inside
   });
 });
 
+

@@ -4,6 +4,7 @@ const userHelper    = require("../lib/util/user-helper")
 
 const express       = require('express');
 const tweetsRoutes  = express.Router();
+const ObjectId      = require('mongodb').ObjectID;
 
 module.exports = function(DataHelpers) {
 //tweetRoutes is an object and get is its property
@@ -29,7 +30,8 @@ module.exports = function(DataHelpers) {
       content: {
         text: req.body.text
       },
-      created_at: Date.now()
+      created_at: Date.now(),
+      total_likes: 0
     };
 
     DataHelpers.saveTweet(tweet, (err) => {
@@ -41,6 +43,16 @@ module.exports = function(DataHelpers) {
     });
   });
 
+  tweetsRoutes.post("/likes", function(req, res) {
+    //getting id from request
+    const tweetId = req.body.tweetId;
+    DataHelpers.saveLike(tweetId, (err, tweet) => {
+      
+    });
+    res.send();
+  })
+
   return tweetsRoutes;
 
 }
+

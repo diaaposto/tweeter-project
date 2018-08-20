@@ -2,10 +2,10 @@
 function describeTime(t) {
   const now = new Date();
   const timeDiff = now - t;
-  console.log("timediff is", timeDiff);
-  console.log("now is", now);
-  console.log("t is", t);
-  console.log("is this t or f", timeDiff <= 1000);
+  // console.log("timediff is", timeDiff);
+  // console.log("now is", now);
+  // console.log("t is", t);
+  // console.log("is this t or f", timeDiff <= 1000);
 
   if (timeDiff <= 1000) {
     return "less than 1 second ago";
@@ -22,6 +22,10 @@ function describeTime(t) {
   }
 }
 
+function heartLikes () {
+
+}
+
 function createTweetElement(tweet) {
   // console.log(tweet.user.avatars.small);
   function escape(str) {
@@ -30,7 +34,7 @@ function createTweetElement(tweet) {
     return div.innerHTML;
   }
   let tweetElement = `
-        <div class="tweet">
+        <div class="tweet" id="${tweet._id}">
           <header>
             <img src=${tweet.user.avatars.small}>
             <h1 class="tweeter-name">${escape(tweet.user.name)}</h1>
@@ -49,9 +53,12 @@ function createTweetElement(tweet) {
                 <i class="fa fa-flag" aria-hidden="true"></i>
                 <i class="fa fa-retweet" aria-hidden="true"></i>
                 <i class="fa fa-heart" aria-hidden="true"></i>
+                <span="likeNumbers">${tweet.total_likes}</span> 
               </div>
           </footer>
         </div>`;
+
+        console.log(tweet);
 
   return $(tweetElement);
 }
@@ -61,6 +68,17 @@ function renderTweets(data) {
     const tweetElement = createTweetElement(tweet);
     $('#tweet-container').prepend(tweetElement);
   }
+  $('.fa-heart').on("click", function(event) {
+    const tweetId = event.target.closest('.tweet').id;
+    console.log('likes');
+
+    $.ajax({
+      url: "/tweets/likes",
+      method: "POST",
+      dataType: 'json',
+      data: {tweetId: tweetId} //want to send the id of the thing -- when you click on a heart, get the closest tweet and then get its id
+    })
+  })
 }
 //reset your form so form content should be clear and reset your counter to 140
 //if you clear content of your form counter should reset automatically
@@ -104,7 +122,7 @@ $(document).ready(function() {
       url: '/tweets',
       dataType: 'json',
       success: function(data) {
-        // console.log(data);
+        console.log(data);
         renderTweets(data); //here is where I pass in the array of objects - from the server in the database
       }
     });
