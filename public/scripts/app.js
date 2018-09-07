@@ -1,33 +1,8 @@
-//how js date to string to get dd/mm/yyyy
-function describeTime(t) {
-  const now = new Date();
-  const timeDiff = now - t;
-  // console.log("timediff is", timeDiff);
-  // console.log("now is", now);
-  // console.log("t is", t);
-  // console.log("is this t or f", timeDiff <= 1000);
-
-  if (timeDiff <= 1000) {
-    return "less than 1 second ago";
-  } else if (timeDiff <= 1000 * 60) {
-    return "less than 1 min ago";
-  } else if (timeDiff <= 1000 * 60 * 60) {
-    return "less than 1 hour ago";
-  } else if (timeDiff <= (1000 * 60 * 60 * 24)) {
-    return "less than 1 day ago";
-  } else if (timeDiff <= (1000 * 60 * 60 * 24 * 7)) {
-    return "less than 1 week ago";
-  } else {
-    return "ages ago";
-  }
-}
-
 function heartLikes () {
 
 }
 
 function createTweetElement(tweet) {
-  // console.log(tweet.user.avatars.small);
   function escape(str) {
     var div = document.createElement('div');
     div.appendChild(document.createTextNode(str));
@@ -46,7 +21,7 @@ function createTweetElement(tweet) {
 
           <footer>
             <div class="tweet-time">
-            ${describeTime(tweet.created_at)}
+            ${moment(tweet.created_at).fromNow()}
               </div>
               
               <div class="icons">
@@ -99,6 +74,7 @@ $(document).ready(function() {
       $('.error-message').slideDown(1000)
                          .delay(2000)
                          .slideUp(1000);
+      // $('#text-area').css({'background-color':'red'})                   
     } else {
       // console.log("Success");
       // console.log(dataString);

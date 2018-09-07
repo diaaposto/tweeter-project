@@ -6,6 +6,7 @@ const PORT          = 8080;
 const express       = require("express");
 const bodyParser    = require("body-parser");
 const app           = express();
+const path          = require("path");
 const MongoClient = require("mongodb").MongoClient;
 const MONGODB_URI = "mongodb://localhost:27017/tweeter";
 const sassMiddleware = require('node-sass-middleware');
@@ -13,6 +14,13 @@ const sassMiddleware = require('node-sass-middleware');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
+
+app.use(
+  "/scripts",
+  express.static(
+    path.join(path.normalize(__dirname + "/.."), "/node_modules/moment/min")
+  )
+);
 
 app.use(sassMiddleware({
     /* Options */

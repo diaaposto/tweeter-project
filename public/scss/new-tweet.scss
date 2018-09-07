@@ -123,7 +123,7 @@
 
 .icons {
   color: #04B2B1;
-  display: none;
+  visibility: hidden;
   margin-top: 10px;
   margin-bottom: 10px;
 
@@ -138,13 +138,13 @@
 }
 
 .tweet:hover .icons {
-  display: block;
+  visibility: visible;
   margin-right: 5px;
   color: #04B2B1;
 }
 
 .tweet:hover {
-  border: solid gray 2px;
+  border: solid gray 1px;
 }
 
 .tweet:hover span {
