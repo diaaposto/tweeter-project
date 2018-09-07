@@ -28,10 +28,13 @@ module.exports = function makeDataHelpers(db) {
     saveLike: function(tweetId, callback) {
       //update the totalLikes for that tweet
       db.collection("tweets")
-      .update(
+      .findOneAndUpdate(
         { _id: ObjectID(tweetId) }, 
         { $inc: { total_likes: 1 } },
-        callback
+        {
+          returnNewDocument: true
+        },
+        callback 
       )
     }
   };

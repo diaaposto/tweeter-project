@@ -46,10 +46,13 @@ module.exports = function(DataHelpers) {
   tweetsRoutes.post("/likes", function(req, res) {
     //getting id from request
     const tweetId = req.body.tweetId;
-    DataHelpers.saveLike(tweetId, (err, tweet) => {
-      
+    DataHelpers.saveLike(tweetId, (err, documents) => {
+      if (err) {
+        console.log("this is the error", err)
+      }
+      res.status(201).send(documents)
     });
-    res.send();
+    // res.send();
   })
 
   return tweetsRoutes;

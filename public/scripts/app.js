@@ -28,7 +28,7 @@ function createTweetElement(tweet) {
                 <i class="fa fa-flag" aria-hidden="true"></i>
                 <i class="fa fa-retweet" aria-hidden="true"></i>
                 <i class="fa fa-heart" aria-hidden="true"></i>
-                <span="likeNumbers">${tweet.total_likes}</span> 
+                <span class="likeNumbers">${tweet.total_likes}</span> 
               </div>
           </footer>
         </div>`;
@@ -45,13 +45,18 @@ function renderTweets(data) {
   }
   $('.fa-heart').on("click", function(event) {
     const tweetId = event.target.closest('.tweet').id;
-    console.log('likes');
-
-    $.ajax({
+    // console.log('likes');
+    const options = {
       url: "/tweets/likes",
       method: "POST",
       dataType: 'json',
-      data: {tweetId: tweetId} //want to send the id of the thing -- when you click on a heart, get the closest tweet and then get its id
+      data: {tweetId: tweetId} 
+    }
+
+    $.ajax(options)
+     //want to send the id of the thing -- when you click on a heart, get the closest tweet and then get its id
+    .done(resp => {
+      $(this).siblings('.likeNumbers').text(resp.value.total_likes)
     })
   })
 }
